@@ -1,0 +1,11 @@
+# Arquivos de Senhas e Credenciais (MUITO IMPORTANTE NÃO SUBIR ISSO)
+.env
+
+# Diretórios virtuais do Python
+__pycache__/
+*.pyc
+
+# Arquivos gerados localmente
+resultados_search_azul_latam_air/
+*.txt
+!requirements.txt

@@ -1,6 +1,6 @@
 # Air Search Pass ✈️
 
-Um motor de buscas autônomo focado na extração e comparação de preços de passagens aéreas. O projeto foi projetado para atuar silenciosamente, raspando dados de passagens aéreas de voos específicos (como Imperatriz -> Recife) para uma janela de 60 dias, localizando os menores preços e consolidando-os automaticamente em uma planilha do Google.
+Um motor de buscas autônomo focado na extração e comparação de preços de passagens aéreas. O projeto foi arquitetado para atuar silenciosamente, raspando dados de passagens aéreas de voos específicos (como Imperatriz -> Recife) para uma janela de 60 dias, localizando os menores preços e consolidando-os automaticamente em uma planilha do Google.
 
 ## 🚀 Como funciona?
 

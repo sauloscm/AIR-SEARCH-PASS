@@ -49,38 +49,55 @@ def update_spreadsheet(flights_data: list):
             print("Nenhum dado de voo para inserir.")
             return
 
-        # Converter a lista de dicionários em DataFrame para facilitar agregações
-        df = pd.DataFrame(flights_data)
+        # Converter a lista de dicionários novos em DataFrame
+        df_new = pd.DataFrame(flights_data)
         
-        # Consolida os dados: pega o menor preço por Origem, Destino e Data
-        idx = df.groupby(['origin', 'destination', 'date'])['price'].idxmin()
-        best_flights_df = df.loc[idx].sort_values(by=['origin', 'date'])
+        # Consolida os dados novos: pega o menor preço por Origem, Destino e Data
+        idx = df_new.groupby(['origin', 'destination', 'date'])['price'].idxmin()
+        best_flights_df = df_new.loc[idx]
         
-        # Cabeçalho
-        headers = ["Origem", "Destino", "Data", "Preço (BRL)", "Hora", "Companhia", "Fonte API", "Link"]
-        
-        # Formata os dados para inserção
-        rows_to_insert = [headers]
+        # Converte os novos dados para o formato/colunas da planilha
+        new_records = []
         for _, row in best_flights_df.iterrows():
-            rows_to_insert.append([
-                row['origin'],
-                row['destination'],
-                row['date'],
-                f"R$ {row['price']:.2f}",
-                row['time'],
-                row['airline'],
-                row['source'],
-                row['link']
-            ])
+            min_found = row.get('min_price_found')
+            if pd.isna(min_found) or min_found is None:
+                min_found = row['price']
+                
+            new_records.append({
+                "Origem": row['origin'],
+                "Destino": row['destination'],
+                "Data": row['date'],
+                "Mínimo Encontrado (Aba)": f"R$ {min_found:.2f}",
+                "Preço Validado (BRL)": f"R$ {row['price']:.2f}",
+                "Hora": row['time'],
+                "Companhia": row['airline'],
+                "Fonte API": row['source'],
+                "Link": row['link']
+            })
+            
+        df_combined = pd.DataFrame(new_records)
+            
+        # Ordena a planilha final por Origem e Data
+        df_combined = df_combined.sort_values(by=['Origem', 'Data'])
+        
+        headers = ["Origem", "Destino", "Data", "Mínimo Encontrado (Aba)", "Preço Validado (BRL)", "Hora", "Companhia", "Fonte API", "Link"]
+        
+        # Se alguma coluna não existir, adiciona
+        for col in headers:
+            if col not in df_combined.columns:
+                df_combined[col] = ""
+                
+        # Converte para lista de listas
+        rows_to_insert = [headers] + df_combined[headers].fillna("").values.tolist()
 
-        # Limpa a planilha inteira e atualiza com os novos dados
-        print("Limpando dados antigos da planilha...")
+        # Limpa a planilha inteira e atualiza com os dados mesclados
+        print("Substituindo dados antigos da planilha com os dados mesclados e atualizados...")
         worksheet.clear()
         
-        print("Inserindo os dados atualizados...")
+        print("Enviando dados para o Google Sheets...")
         worksheet.update('A1', rows_to_insert)
         
-        print(f"Planilha atualizada com sucesso! Total de {len(rows_to_insert)-1} voos registrados.")
+        print(f"Planilha atualizada com sucesso! Total de {len(rows_to_insert)-1} voos registrados atualmente na planilha.")
         
     except Exception as e:
         print(f"Erro ao atualizar a planilha: {e}")

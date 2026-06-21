@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HYDRA v2.0 - Controle Central</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="grid-overlay"></div>
+        <div class="glow-effect"></div>
+    </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <h1>HYDRA <span>v2.0</span></h1>
+                <p class="subtitle">Scraper de Aviação Stealth CDP</p>
+            </div>
+            <div class="header-actions">
+                <a href="#" id="sheet-btn" class="btn btn-outline" target="_blank" disabled>
+                    <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="8" y1="13" x2="16" y2="13"></line>
+                        <line x1="8" y1="17" x2="16" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Acessar Planilha
+                </a>
+            </div>
+        </header>
+
+        <main class="dashboard">
+            <section class="control-panel panel">
+                <h2 class="panel-title">Parâmetros de Voo</h2>
+                <form id="scraper-form">
+                    <div class="form-group">
+                        <label for="routes">Rotas (Origem-Destino, separadas por vírgula)</label>
+                        <input type="text" id="routes" name="routes" value="IMP-REC, REC-IMP" required placeholder="Ex: IMP-REC, GRU-CGH">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="start_date">Data Inicial (DD/MM/AAAA)</label>
+                            <input type="text" id="start_date" name="start_date" required placeholder="15/07/2026">
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">Data Final (DD/MM/AAAA)</label>
+                            <input type="text" id="end_date" name="end_date" required placeholder="30/07/2026">
+                        </div>
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" id="start-btn" class="btn btn-primary">
+                            <span class="pulse-ring"></span>
+                            INICIAR PROTOCOLO HYDRA
+                        </button>
+                        <button type="button" id="stop-btn" class="btn btn-danger" disabled>
+                            ABORTAR MISSÃO
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="status-indicator">
+                    <div class="status-dot" id="status-dot"></div>
+                    <span id="status-text">Sistema Ocioso</span>
+                </div>
+            </section>
+
+            <section class="terminal-panel panel">
+                <div class="terminal-header">
+                    <div class="terminal-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="terminal-title">Terminal de Operações</div>
+                </div>
+                <div class="terminal-body">
+                    <div id="hydra-sprite-container" class="hydra-sprite" style="display: none;"></div>
+                    <div class="terminal-window" id="terminal">
+                        <!-- Logs serão injetados aqui -->
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

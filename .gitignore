@@ -7,5 +7,7 @@ __pycache__/
 
 # Arquivos gerados localmente
 resultados_search_azul_latam_air/
+chrome_profile/
+test_profile/
 *.txt
 !requirements.txt

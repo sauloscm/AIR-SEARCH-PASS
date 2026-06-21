@@ -1,0 +1,364 @@
+:root {
+    --bg-color: #050806;
+    --panel-bg: rgba(10, 18, 12, 0.7);
+    --panel-border: rgba(30, 80, 45, 0.5);
+    --primary-neon: #00ff66;
+    --primary-dark: #00cc52;
+    --text-main: #e0f2e5;
+    --text-muted: #8ab396;
+    --danger: #ff3333;
+    --danger-dark: #cc0000;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Efeitos de Fundo (Temática Aviação Militar/Radar) */
+.background-effects {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.grid-overlay {
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--panel-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--panel-border) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.1;
+    perspective: 500px;
+}
+
+.glow-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, rgba(0, 255, 102, 0.05) 0%, transparent 70%);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--panel-border);
+    padding-bottom: 1rem;
+}
+
+.logo h1 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.logo span {
+    color: var(--primary-neon);
+    text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+/* Layout Principal */
+.dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 2rem;
+}
+
+@media (max-width: 900px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Painéis com Glassmorphism */
+.panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--panel-border);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.panel-title {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-neon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Formulário */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+input {
+    width: 100%;
+    padding: 0.8rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+}
+
+/* Botões */
+.actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-primary {
+    background: var(--primary-neon);
+    color: #000;
+    flex: 2;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.5);
+}
+
+.btn-danger {
+    background: transparent;
+    border: 1px solid var(--danger);
+    color: var(--danger);
+    flex: 1;
+}
+
+.btn-danger:hover {
+    background: var(--danger);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.5);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--panel-border);
+    color: var(--primary-neon);
+}
+
+.btn-outline:hover {
+    border-color: var(--primary-neon);
+    background: rgba(0, 255, 102, 0.1);
+}
+
+/* Indicador de Status */
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--text-muted);
+}
+
+.status-dot.active {
+    background: var(--primary-neon);
+    box-shadow: 0 0 10px var(--primary-neon);
+    animation: pulse 1.5s infinite;
+}
+
+.status-dot.error {
+    background: var(--danger);
+    box-shadow: 0 0 10px var(--danger);
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.5; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Terminal */
+.terminal-panel {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+}
+
+.terminal-header {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--panel-border);
+    display: flex;
+    align-items: center;
+    border-radius: 12px 12px 0 0;
+}
+
+.terminal-dots span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.terminal-dots span:nth-child(1) { background: #ff5f56; }
+.terminal-dots span:nth-child(2) { background: #ffbd2e; }
+.terminal-dots span:nth-child(3) { background: #27c93f; }
+
+.terminal-title {
+    margin-left: 1rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.terminal-body {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2rem;
+    padding: 3rem 2rem 2rem 2rem;
+    flex: 1;
+    background: #020202;
+    border-radius: 0 0 12px 12px;
+}
+
+.terminal-window {
+    width: 280px;
+    height: 280px;
+    flex-shrink: 0;
+    padding: 1rem;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    line-height: 1.4;
+    background: #050806;
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    color: #ffffff;
+}
+
+.terminal-window::-webkit-scrollbar {
+    width: 6px;
+}
+.terminal-window::-webkit-scrollbar-track {
+    background: transparent;
+}
+.terminal-window::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 4px;
+}
+
+.log-line {
+    margin-bottom: 0.3rem;
+    word-break: break-all;
+}
+
+/* Reduzir opacidade de debugs para não ofuscar */
+.log-line.system { color: #cccccc; text-shadow: none; }
+.log-line.debug { color: #999999; opacity: 0.8; }
+.log-line.success { color: #ffffff; font-weight: bold; }
+.log-line.error { color: #ff6666; text-shadow: none; }
+.log-line.warning { color: #ffcc66; text-shadow: none; }
+
+/* Sprite Animation */
+.hydra-sprite {
+    width: 280px;
+    height: 280px;
+    margin: 0;
+    flex-shrink: 0;
+    background-image: url('/static/hydra_clean.png');
+    background-color: transparent;
+    background-size: 200% 400%;
+    background-position: 0% 0%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+    border: 2px solid rgba(0, 255, 65, 0.5);
+    image-rendering: pixelated;
+    transition: none; /* Corte seco entre os frames para parecer 8-bits */
+}

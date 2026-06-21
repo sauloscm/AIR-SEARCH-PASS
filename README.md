@@ -1,18 +1,20 @@
-# Air Search Pass ✈️
+# Hydra Air Search ✈️
 
-Um motor de buscas autônomo focado na extração e comparação de preços de passagens aéreas. O projeto foi arquitetado para atuar silenciosamente, raspando dados de passagens aéreas de voos específicos (como Imperatriz -> Recife) para uma janela de 60 dias, localizando os menores preços e consolidando-os automaticamente em uma planilha do Google.
+Um motor de buscas autônomo focado na extração e comparação de preços de passagens aéreas. O projeto agora conta com uma interface Web moderna (Controle Central Hydra) que executa a raspagem em segundo plano, localizando os menores preços e consolidando-os automaticamente em uma planilha do Google.
 
 ## 🚀 Como funciona?
 
-Este projeto contém duas abordagens de robôs:
+Este projeto foi atualizado para a versão **Hydra v2.0 - CDP Stealth**:
 
-1. **O Motor Principal (Google Flights):** Utiliza *Web Scraping* com a biblioteca Playwright para abrir um navegador fantasma e extrair de forma robusta e paralela os valores diretamente do agregador do Google Flights. O resultado é jogado em tempo real numa planilha da nuvem utilizando Google Service Accounts.
-2. **O Motor Comparativo (Azul x LATAM x Google):** Um orquestrador paralelo feito para visitar as companhias separadamente, enfrentar os escudos de segurança delas e imprimir no terminal um embate de quem fornece a passagem mais barata.
+1. **O Motor Principal (Google Flights):** Utiliza *Web Scraping* com a biblioteca Playwright para abrir um navegador fantasma e extrair de forma robusta e paralela os valores do Google Flights.
+2. **Interface Web Interativa:** Um painel de controle construído com FastAPI e WebSockets que exibe logs em tempo real como um terminal Matrix, acompanhado de uma animação clássica em 8-bits da Hydra regenerando suas cabeças enquanto minera os preços.
+3. **Google Sheets Integration:** O resultado é jogado na nuvem instantaneamente utilizando Google Service Accounts.
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **Python 3.10+**
-- **Playwright** (Raspagem de Dados / Navegação Headless)
+- **Python 3.10+ & FastAPI** (Backend e WebSockets)
+- **HTML, CSS e JavaScript** (Interface do Painel)
+- **Playwright** (Raspagem de Dados / Navegação Headless stealth)
 - **gspread & pandas** (Gestão, formatação e inserção no banco de dados / Google Sheets)
 - **Git** (Versionamento)
 
